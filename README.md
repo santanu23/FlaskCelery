@@ -11,6 +11,7 @@ Docker Compose: https://docs.docker.com/compose/install/
 
 ## Build
 `docker-compose up --build`
+
 `docker-compose up -d --build` for detached mode
 
 ## Scale
@@ -18,4 +19,7 @@ Docker Compose: https://docs.docker.com/compose/install/
 
 ## Monitor
 Flower: http://localhost:5555/dashboard
+![Flower](https://github.com/santanu23/FlaskCelery/blob/master/docs/flower.png?raw=true)
+
 RabbitMQ: http://localhost:15672/#/
+![RabbitMQ](https://github.com/santanu23/FlaskCelery/blob/master/docs/rabbitmq.png?raw=true)
