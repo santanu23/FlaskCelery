@@ -1,0 +1,41 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "5001:5001"
+    depends_on:
+      - redis
+      - rabbit
+  worker:
+    build:
+      context: celery-queue
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+      - rabbit
+  monitor:
+    build:
+      context: celery-queue
+      dockerfile: Dockerfile
+    ports:
+     - "5555:5555"
+    entrypoint: flower
+    command:  -A tasks --port=5555 --broker=amqp://rabbitmq:rabbitmq@rabbit:5672/
+    depends_on:
+      - redis
+      - rabbit
+  redis:
+    image: redis
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:management
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    ports:
+      - "5673:5672"
+      - "15672:15672"
