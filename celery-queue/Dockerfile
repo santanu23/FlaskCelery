@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM jjanzic/docker-python3-opencv
 
 ENV CELERY_BROKER_URL amqp://rabbitmq:rabbitmq@rabbit:5672/
 ENV CELERY_RESULT_BACKEND redis://redis:6379
